@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 import AddProjectForm from './AddProjectForm';
 import ProjectList from './ProjectList';
 import { getProjectsByUsername } from '@/lib/data';
