@@ -1,6 +1,6 @@
 'use server';
 
-import { sql } from '@/lib/db';
+import { getSql } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 
 export interface TagInput {
@@ -19,6 +19,7 @@ export interface CreateProjectInput {
 
 export async function createProject(data: CreateProjectInput) {
   try {
+    const sql = getSql();
     const userResult = await sql`
       SELECT id FROM users WHERE username = ${data.username} LIMIT 1;
     `;
@@ -57,6 +58,7 @@ export async function createProject(data: CreateProjectInput) {
 
 export async function deleteProject(projectId: number, username: string) {
   try {
+    const sql = getSql();
     await sql`
       DELETE FROM projects
       WHERE id = ${projectId};

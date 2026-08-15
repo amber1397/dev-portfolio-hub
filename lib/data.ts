@@ -1,4 +1,4 @@
-import { sql } from './db';
+import { getSql } from './db'; 
 
 export interface Tag {
   id: number;
@@ -16,6 +16,7 @@ export interface Project {
 }
 
 export async function getProjectsByUsername(username: string): Promise<Project[]> {
+  const sql = getSql();
   const data = await sql`
     SELECT 
       p.id AS project_id,

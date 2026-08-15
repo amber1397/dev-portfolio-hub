@@ -1,14 +1,9 @@
 import { neon } from '@neondatabase/serverless';
 
-const getSql = () => {
+export function getSql() {
   const url = process.env.DATABASE_URL;
   if (!url) {
-    throw new Error('DATABASE_URL is missing in environment variables');
+    throw new Error('DATABASE_URL environment variable is missing.');
   }
   return neon(url);
-};
-
-export const sql = (strings: TemplateStringsArray, ...values: any[]) => {
-  const sqlClient = getSql();
-  return sqlClient(strings, ...values);
-};
+}
