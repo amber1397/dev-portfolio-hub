@@ -1,6 +1,5 @@
 import { neon } from '@neondatabase/serverless';
 
-// Ensure DATABASE_URL is read at runtime safely
 const getSql = () => {
   const url = process.env.DATABASE_URL;
   if (!url) {
