@@ -1,7 +1,12 @@
 import { neon } from '@neondatabase/serverless';
 
-const getDatabaseUrl = () => {
-  return process.env.DATABASE_URL || 'postgresql://placeholder:placeholder@localhost:5432/placeholder';
+export const sql = (strings: TemplateStringsArray, ...values: any[]) => {
+  const dbUrl = process.env.DATABASE_URL;
+  
+  if (!dbUrl) {
+    throw new Error('DATABASE_URL environment variable is missing.');
+  }
+  
+  const client = neon(dbUrl);
+  return client(strings, ...values);
 };
-
-export const sql = neon(getDatabaseUrl());
